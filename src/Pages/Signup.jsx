@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Signup({ navigation }) {
+function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     FirstName: "",
     LastName: "",
@@ -35,7 +37,7 @@ function Signup({ navigation }) {
       );
 
       console.log("API Response:", response.data);
-      navigation.navigate("/signin");
+      navigate("/signin");
 
       // Handle success (e.g., show a success message or redirect)
     } catch (error) {
@@ -145,28 +147,6 @@ function Signup({ navigation }) {
                         onChange={handleChange}
                       />
                     </div>
-                    {/* <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Mobile Number"
-                      />
-                    </div> */}
-
-                    {/* <select className="form-control">
-                      <option value="#">Select City</option>
-                      <option value="#">London UK</option>
-                      <option value="#">Newyork, USA</option>
-                      <option value="#">Seoul, Korea</option>
-                      <option value="#">Beijing, China</option>
-                    </select>
-                    <div className="checkbox">
-                      <label className="pull-left checked" for="signing">
-                        <input type="checkbox" name="signing" id="signing" /> By
-                        signing up for an account you agree to our Terms and
-                        Conditions{" "}
-                      </label>
-                    </div> */}
                     <button type="button" className="btn" onClick={handleSave}>
                       Registration
                     </button>
@@ -175,59 +155,6 @@ function Signup({ navigation }) {
                     {error && <p style={{ color: "red" }}>{error}</p>}
                   </form>
                 </div>
-                {/* <div role="tabpanel" className="tab-pane" id="post-job">
-                  <form action="#">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Employer Name"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Email Id"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Password"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Confirm Password"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Contact Number"
-                      />
-                    </div>
-                    <div className="checkbox">
-                      <label className="pull-left checked" for="signing-2">
-                        <input
-                          type="checkbox"
-                          name="signing-2"
-                          id="signing-2"
-                        />
-                        By signing up for an account you agree to our Terms and
-                        Conditions
-                      </label>
-                    </div>
-                    <button type="submit" className="btn">
-                      Registration
-                    </button>
-                  </form>
-                </div> */}
               </div>
             </div>
           </div>
