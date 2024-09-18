@@ -42,20 +42,10 @@ function Signup() {
       // Handle success (e.g., show a success message or redirect)
     } catch (error) {
       if (error.response) {
-        // The server responded with a status code other than 2xx
-        console.error("Error Response:", error.response.data);
         setError(
-          error.response.data.message ||
+          error.response.data.Error ||
             "An error occurred during registration."
         );
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error("No response received:", error.request);
-        setError("No response from server. Please try again.");
-      } else {
-        // Something else went wrong during the request
-        console.error("Error:", error.message);
-        setError("An unexpected error occurred.");
       }
     }
   };
