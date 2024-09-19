@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // State to manage loading
   const [formData, setFormData] = useState({
     FirstName: "",
     LastName: "",
@@ -21,7 +22,10 @@ function Signup() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSave = async () => {
+  const handleSave = async (event) => {
+    event.preventDefault();
+    setLoading(true); // Start loading before API call
+    setError(null);
     try {
       console.log("Submitting form:", formData);
 
@@ -43,10 +47,11 @@ function Signup() {
     } catch (error) {
       if (error.response) {
         setError(
-          error.response.data.Error ||
-            "An error occurred during registration."
+          error.response.data.Error || "An error occurred during registration."
         );
       }
+    } finally {
+      setLoading(false); // Stop loading after API call finishes
     }
   };
   return (
@@ -56,6 +61,8 @@ function Signup() {
         <div className="container  text-center">
           <div className="user-account-content">
             <div className="user-account job-user-account">
+              {/* Conditionally render loader while loading is true */}
+              {loading && <div className="loader">Loading...</div>}
               <h2>Create An Account</h2>
               <ul className="nav nav-tabs text-center" role="tablist">
                 <li role="presentation">

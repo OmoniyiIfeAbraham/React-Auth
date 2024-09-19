@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Signin() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // State to manage loading
   const [formData, setFormData] = useState({
     Email: "",
     Password: "",
@@ -18,7 +19,10 @@ function Signin() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSave = async () => {
+  const handleSave = async (event) => {
+    event.preventDefault();
+    setLoading(true); // Start loading before API call
+    setError(null);
     try {
       console.log("Submitting form:", formData);
 
@@ -43,6 +47,8 @@ function Signin() {
           error.response.data.Error || "An error occurred during login."
         );
       }
+    } finally {
+      setLoading(false); // Stop loading after API call finishes
     }
   };
   return (
@@ -52,6 +58,8 @@ function Signin() {
         <div className="container text-center">
           <div className="user-account-content">
             <div className="user-account">
+              {/* Conditionally render loader while loading is true */}
+              {loading && <div className="loader">Loading...</div>}
               <h2>User Login</h2>
 
               <form action="#">
